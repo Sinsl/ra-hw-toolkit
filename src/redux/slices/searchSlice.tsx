@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { StateSearch } from "../../types/types";
 
-const initialState = {
+const initialState: StateSearch = {
   valueInput: ''
 }
 

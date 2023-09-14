@@ -4,9 +4,22 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from './components/Home';
 import { Favorites } from './components/favor/Favorites';
 import { CardFilm } from './components/single/CardFilm';
+import { useEffect } from 'react';
+import { addAllFilm } from './redux/slices/favoritesSlice';
+import { useDispatch } from 'react-redux';
+
 
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storage = localStorage.getItem('favor');
+    if (storage) {
+      dispatch(addAllFilm(JSON.parse(storage)))
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <main>

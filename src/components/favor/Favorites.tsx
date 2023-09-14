@@ -1,15 +1,16 @@
-import data from '../../../test.json';
+import { useSelector } from 'react-redux';
 import { ItemFilm } from '../single/ItemFilm';
+import { RootState } from '../../redux/store/store';
 
 export const Favorites = () => {
-
-  const deleteFavor = (id: string) => {
-    console.log(id)
-  }
+  const {favorites} = useSelector((state: RootState) => state.favorites);
 
   return (
     <div className="result-list">
-      {data.map((item) => <ItemFilm key={item.imdbID} item={item} deleteFavor={deleteFavor}/>)}
+      {favorites.length 
+        ? favorites.map((item) => <ItemFilm key={item.imdbID} item={item} type='favor'/>)
+        : (<div>В Избранном отсутствуют фильмы</div>)
+      }
     </div>
   )
 }

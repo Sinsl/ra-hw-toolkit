@@ -1,19 +1,23 @@
+import { SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeInput } from "../../redux/slices/searchSlice";
+import { fetchListFilm, clearSearch } from "../../redux/slices/getListFilmsSlice";
+import { RootState, AppDispatch } from "../../redux/store/store";
 
 
 export const SearchForm = () => {
-  const dispatch = useDispatch();
-  const valueInput = useSelector(state => state.search.valueInput);
+  const dispatch: AppDispatch = useDispatch();
+  const valueInput = useSelector((state: RootState) => state.search.valueInput);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(valueInput)
+    dispatch(fetchListFilm(valueInput));
   }
 
-  const onReset = (e) => {
+  const onReset = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(changeInput(''));
+    dispatch(clearSearch());
   }
 
   return (
